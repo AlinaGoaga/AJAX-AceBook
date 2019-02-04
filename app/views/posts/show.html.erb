@@ -3,9 +3,19 @@ Created <%= @post.created_at.strftime("on %d/%m/%Y at %I:%M%p") %>
 <%= link_to 'Delete', post_path, method: :delete, data: {confirm: "Are you sure?"}  %>
 
 <% if @post.edit_timer? %>
-  <%= link_to 'Edit', edit_post_path %>
+<%= link_to 'Edit', edit_post_path %>
 <%end%>
 
 <% if flash[:error] %>
-   <div><%= flash[:error] %></div>
- <% end %>
+<div><%= flash[:error] %></div>
+<% end %>
+
+<div>
+  <% @post.comments.each do |comment| %>
+  <%= comment.body %> (by <%= comment.user.email %>)<br>
+  <% end %>
+</div>
+
+<div"> Join the conversation:
+<%= render "comments/form" %>
+</div>
