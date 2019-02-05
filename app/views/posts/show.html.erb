@@ -1,16 +1,25 @@
-<%= simple_format(@post.message) %><br>
-Created <%= @post.created_at.strftime("on %d/%m/%Y at %I:%M%p") %>
-<%= link_to 'Delete', post_path, method: :delete, data: {confirm: "Are you sure?"}  %>
+<div class="posts-wrapper row">
+  <div class="post">
+    <div class="post-head">
+      <%= simple_format(@post.message) %><br>
+      <br>Created <%= @post.created_at.strftime("on %d/%m/%Y at %I:%M%p") %>
+    </div>
+  </div>
+</div>
 
-<% if @post.edit_timer? %>
-<%= link_to 'Edit', edit_post_path %>
-<%end%>
+<div class="text-center edit-links">
+  <%= link_to 'Delete', post_path, method: :delete, data: {confirm: "Are you sure?"}  %>
+  
+  <% if @post.edit_timer? %>
+    <%= link_to 'Edit', edit_post_path %>
+  <%end%>
 
-<% if flash[:error] %>
-<div><%= flash[:error] %></div>
-<% end %>
-
-<div>
+  <% if flash[:error] %>
+    <div><%= flash[:error] %></div>
+  <% end %>
+</div>
+                                   
+ <div>
   <% @post.comments.each do |comment| %>
   <%= comment.body %> (by <%= comment.user.email %>)<br>
   <% end %>

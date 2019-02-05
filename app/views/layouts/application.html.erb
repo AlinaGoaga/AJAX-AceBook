@@ -4,15 +4,21 @@
     <title>Acebook</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag 'application' %>
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
 
   </head>
 
-  <body>
+<body>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
+    <% if user_signed_in? %>
+      <%= render "layouts/signed_in_nav_bar" %>
+    <% else %>
+      <%= render "layouts/signed_out_nav_bar" %>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
